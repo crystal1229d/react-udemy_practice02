@@ -12,9 +12,15 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
-    setFormIsValid(
+    const identifier = setTimeout(() => { 
+      setFormIsValid(
       enteredEmail.includes('@') && enteredPassword.trim().length > 6
     );
+    }, 500); // { } 내의 함수를 실행하기 전에 500ms 초를 기다린다 
+
+    return () => { 
+      clearTimeout(identifier)
+    }; // cleanup function 
   }, [enteredEmail, enteredPassword])
   
 
