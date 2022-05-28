@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
@@ -42,6 +42,22 @@ const Login = (props) => {
     value: '',
     isValid: null, 
   })
+
+  const { isValid: emailIsValid } = emailState       // object destructuring + 별칭 할당(alias assignment)   <-> * 값 할당 (value assignment)
+  const { isValid: passwordIsValid } = passwordState  // object destructuring + 별칭 할당(alias assignment)
+
+  useEffect(() => {
+    const identifier = setTimeout(() => { 
+      console.log('checking validity')
+      setFormIsValid(
+      emailIsValid && passwordIsValid
+    );
+    }, 500); 
+
+    return () => { 
+      clearTimeout(identifier)
+    }; 
+  }, [emailIsValid, passwordIsValid])
 
   const emailChangeHandler = (event) => {
     // setEnteredEmail(event.target.value);
