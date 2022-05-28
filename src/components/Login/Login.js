@@ -27,10 +27,6 @@ const passwordReducer = (state, action) => {
 // 인자 : 최신 state snapshot, dispatched action 
 
 const Login = (props) => {
-  // const [enteredEmail, setEnteredEmail] = useState('');
-  // const [emailIsValid, setEmailIsValid] = useState();
-  // const [enteredPassword, setEnteredPassword] = useState('');
-  // const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
@@ -44,8 +40,6 @@ const Login = (props) => {
   })
 
   const emailChangeHandler = (event) => {
-    // setEnteredEmail(event.target.value);
-
     dispatchEmail({ type: 'USER_INPUT', payload: event.target.value }) 
     // dispatch Function 을 호출하여 state 값을 update 하고, action 에 전달
     // action 은 사용자가 정의할 수 있다. 형식은 자유이지만, 보통 객체.
@@ -59,7 +53,6 @@ const Login = (props) => {
   };
 
   const passwordChangeHandler = (event) => {
-    // setEnteredPassword(event.target.value);
     dispatchPassword({ type: 'USER_INPUT', payload: event.target.value })
 
     setFormIsValid(
@@ -68,12 +61,10 @@ const Login = (props) => {
   };
 
   const validateEmailHandler = () => {
-    // setEmailIsValid(emailState.isValid);
     dispatchEmail({ type: 'INPUT_BLUR' })
   };
 
   const validatePasswordHandler = () => {
-    // setPasswordIsValid(enteredPassword.trim().length > 6);
     dispatchPassword({ type: 'INPUT_BLUR' })
   };
 
