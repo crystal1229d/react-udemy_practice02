@@ -13,7 +13,7 @@ export const AuthContextProvider = (props) => {
         const storedUserLoggedInformation = localStorage.getItem('isLoggedIn')
 
         if (storedUserLoggedInformation === '1') {
-        setIsLoggedIn(true)
+            setIsLoggedIn(true)
         }
     }, [])
 
