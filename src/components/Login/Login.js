@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useContext } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import AuthContext from '../../store/auth-context';
 
 const emailReducer = (state, action) => { // 여기의 state 는 최신 state snapshot 임이 보장된다 (react 가 제공)
   if (action.type === 'USER_INPUT') {
@@ -43,6 +44,8 @@ const Login = (props) => {
     isValid: null, 
   })
 
+  const authContext = useContext(AuthContext)
+
   const { isValid: emailIsValid } = emailState       // object destructuring + 별칭 할당(alias assignment)   <-> * 값 할당 (value assignment)
   const { isValid: passwordIsValid } = passwordState  // object destructuring + 별칭 할당(alias assignment)
 
@@ -69,18 +72,18 @@ const Login = (props) => {
     // 그러면 useReducer 에 이 dispatchEmail 이라는 리듀서 함수를 전달했기 때문에
     // useReducer 에서 전달한 액션 = {type: 'USER_INPUT', val: '...'} 을 처리할 수 있다
 
-    setFormIsValid(
-      emailState.isValid && passwordState.isValid
-    );
+    // setFormIsValid(
+    //   emailState.isValid && passwordState.isValid
+    // );
   };
 
   const passwordChangeHandler = (event) => {
     // setEnteredPassword(event.target.value);
     dispatchPassword({ type: 'USER_INPUT', payload: event.target.value })
 
-    setFormIsValid(
-      emailState.value.includes('@') && event.target.value.trim().length > 6
-    )
+    // setFormIsValid(
+    //   emailState.value.includes('@') && event.target.value.trim().length > 6
+    // )
   };
 
   const validateEmailHandler = () => {
@@ -95,7 +98,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    authContext.onLogin(emailState.value, passwordState.value);
   };
 
   return (
