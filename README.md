@@ -26,9 +26,9 @@
 
 * <strong>Features</strong>
     1. Login Form
-        1-1. email validitor
-        1-2. password validitor
-        1-3. when hitting Login Button, focus on invalid input 
+        * email validitor
+        * password validitor
+        * when hitting Login Button, focus on invalid input 
     2. Logout 
     3. Nav bar changes depening on Login state
 
